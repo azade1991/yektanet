@@ -46,7 +46,6 @@ export class UtilService {
 
   }
   findNode(nodes: any, value: any): any {
-    debugger
     const rootvalue = new Date(nodes.value.date).getTime();
     if (value === rootvalue) {
       return nodes.list;
