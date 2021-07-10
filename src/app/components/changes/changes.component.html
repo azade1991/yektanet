@@ -1,0 +1,84 @@
+<div class="main-body">
+    <h1 class="header1">لیست تغیرات</h1>
+
+    <app-loading [loading]="loading"> </app-loading>
+
+    <div class="table-container" *ngIf="!loading">
+        <div class="filter-section">
+            <div class="input-group">
+                <label for="name">نام تغییر دهنده</label>
+                <input type="text" id="name" [(ngModel)]="filter.name" (keyup)="filterTable()">
+            </div>
+            <div class="input-group">
+                <label for="date">تاریخ</label>
+                <!-- <input type="date" id="date" [(ngModel)]="filter.date" (change)="applyFilter()"> -->
+                <input type="text" maxlength="10" id="date" [(ngModel)]="filter.date" (keyup)="checkFormat()"
+                    [class.error]="errMsg">
+                <span class="error">{{errMsg}}</span>
+                <span class="hint">به عنوان نمونه : 15-08- 2018</span>
+            </div>
+
+            <div class="input-group">
+                <label for="title">عنوان آگهی</label>
+                <input type="text" id="title" [(ngModel)]="filter.title" (keyup)="filterTable()">
+            </div>
+
+            <div class="input-group">
+                <label for="filed">فیلد</label>
+                <input type="text" id="filed" [(ngModel)]="filter.field" (keyup)="filterTable()">
+            </div>
+        </div>
+        <div class="table-section">
+            <table>
+                <thead>
+                    <tr>
+                        <th>نام تغییر دهنده</th>
+                        <th class="sort" (click)="toggleSort()">
+                            <span>تاریخ</span>
+                            <div class="img-container">
+                                <img *ngIf="sort === '' || sort === sortType.ASC" src="assets/img/up.png" alt="">
+                                <img *ngIf="sort === '' || sort === sortType.DESC" src="assets/img/down.png" alt="">
+                            </div>
+                        </th>
+                        <th>عنوان آگهی</th>
+                        <th>فیلد</th>
+                        <th>مقدار قدیمی</th>
+                        <th>مقدار جدید</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of changeList | slice: ((page * pageSize) - pageSize) : (page * pageSize)">
+                        <td class="star">
+                            <svg (click)="toggleInStorage(item.id)" xmlns="http://www.w3.org/2000/svg"
+                                [class.selected]="isSaved(item.id)" width="16" height="16" viewBox="0 0 16 16"
+                                id="'star-'i">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#BDBDBD" fill-rule="nonzero">
+                                        <g>
+                                            <g>
+                                                <path
+                                                    d="M16 6.22c0 .174-.125.338-.25.462l-3.49 3.404.827 4.808c.01.067.01.124.01.192 0 .25-.115.48-.395.48-.135 0-.27-.047-.384-.114L8 13.182l-4.318 2.27c-.124.067-.25.115-.384.115-.279 0-.404-.231-.404-.48 0-.068.01-.126.02-.193l.826-4.808-3.5-3.404C.125 6.558 0 6.394 0 6.221c0-.289.297-.404.538-.443l4.827-.702L7.529.702c.086-.183.25-.395.471-.395.222 0 .385.212.471.395l2.164 4.374 4.827.702c.23.04.539.154.539.443H16z"
+                                                    transform="translate(-197 -212) translate(106 212) translate(91.429)" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            {{item.name}}
+                        </td>
+                        <td>{{item.date}}</td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.field}}</td>
+                        <td>{{item.old_value}}</td>
+                        <td>{{item.new_value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-section">
+            <button class="btn" [disabled]="page >= pagesLength" (click)="nextPage()">بعدی</button>
+            <span>صفحه {{page}} از {{pagesLength}}</span>
+            <button class="btn" [disabled]="page == 1" (click)="lastPage()">قبلی</button>
+        </div>
+    </div>
+</div>

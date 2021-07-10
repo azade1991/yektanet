@@ -1,1 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Iransans";
+    font-style: normal;
+    font-weight: 500;
+    src: url("./assets/fonts/eot/IRANSansWeb.eot");
+    src: url("./assets/fonts/woff2/IRANSansWeb.woff2") format("woff2"),
+    url("./assets/fonts/woff/IRANSansWeb.woff") format("woff"),
+    url("./assets/fonts/ttf/IRANSansWeb.ttf") format("truetype");
+  }
+.container {
+    direction: rtl;
+    padding: 15px;
+    font-size: 12px;
+    line-height: 20px;
+    font-family: "Iransans";
+    @media screen and (max-width: 480px) {
+        padding: 5px;
+
+    }
+}
+.header1{
+    font-size: 24px;
+    line-height: 33px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    height: 40px;
+    font-size: 14px;
+    font-family: "Iransans";
+    border-radius: 8px;
+    padding: 0 15px;
+    // background: #fff;
+    // background-color: #f6f6f6;
+    outline: none;
+    border: 1px solid;
+    cursor: pointer;
+    color: #000;
+}
+.input-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    .hint {
+        font-size: 9px;
+        margin-right: 10px;
+        // color: #e8e8e8;
+    }
+    span.error {
+        font-size: 9px;
+        margin-right: 10px;
+        color: red;
+    }
+    input {
+        font-family: "Iransans";
+        height: 40px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+        box-shadow: none;
+        border: 1px solid #e8e8e8;
+        padding: 0 5px;
+        &.error {
+            border-color: red;
+        }
+    }
+}

@@ -1,0 +1,85 @@
+
+.main-body {
+    margin-top: 20px;
+    .table-container {
+        padding: 15px 25px;
+        @media screen and (max-width: 480px) {
+            padding: 5px 10px;
+        }
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+                .input-group {
+                    @media screen and (max-width: 768px) {
+                        width: 24%;
+                    }
+                    @media screen and (max-width: 480px) {
+                        width: 45%;
+                    }
+                }
+        }
+        .table-section {
+            margin-bottom: 20px;
+            @media screen and (max-width: 480px) {
+                overflow-x: auto;
+            }
+            table {
+                width: 100%;
+                border-radius: 16px;
+                box-shadow: 0 0 15px #aaa;
+                font-size: 12px;
+                line-height: 21px;
+                border-collapse: separate;
+                border-spacing: 0;
+                td{
+                    min-width: 80px;
+                    &.star{
+                        // display: flex;
+                        svg{
+                            margin-left: 5px;
+                            margin-bottom: -5px;
+                            cursor: pointer;
+                            &.selected {
+                                path{
+                                    fill: #fdb202;
+                                  }
+                            }
+                        }
+                    }
+                }
+                th, td {
+                padding: 5px 10px;
+                text-align: right;
+                }
+                thead{
+                    height: 50px;
+                }
+                tbody tr:nth-child(odd) td {
+                    background-color: #f6f6f6;
+                }
+                .sort {
+                    position: relative;
+                    cursor: pointer;
+                    .img-container {
+                     
+                        position: absolute;
+                        right: 40px;
+                        bottom: 10px;
+                        img {
+                            width: 16px;
+                            height: 16px;
+                        }
+                    }
+                }
+            }
+        }
+        .pagination-section{
+            text-align: center;
+            .btn {
+                margin: 0 10px;
+            }
+        }
+    }
+}
