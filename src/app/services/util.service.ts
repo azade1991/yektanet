@@ -69,8 +69,7 @@ export class UtilService {
   }
   binarySearch(items: ChangeItem[], value: Date) {
     const nodes = this.createBST(items);
-    const result = this.findNode(nodes.root, value.getTime());
-    return result;
+    return this.findNode(nodes.root, value.getTime());
   }
 }
 
@@ -78,12 +77,12 @@ class Node {
   value: any;
   leftChild: any;
   rightChild: any;
-  list: any[];
+  list: any[]; // keep duplicate items and value
   constructor(value: any) {
     this.value = value;
     this.leftChild = null;
     this.rightChild = null;
-    this.list = [];
+    this.list = []; 
     this.list.push(value);
   };
 }
@@ -97,11 +96,10 @@ class BinarySearchTree {
     let newNode = new Node(data);
     if (this.root === null) {
       this.root = newNode;
-    }
-    else {
+    } else {
       this.insertNode(this.root, newNode);
-    };
-  };
+    }
+  }
   insertNode(node: Node, newNode: Node) {
     const neWDate = new Date(newNode.value.date).getTime();
     const date = new Date(node.value.date).getTime();
@@ -113,20 +111,18 @@ class BinarySearchTree {
       if (neWDate == date) {
         node.list.push(newNode.value)
         return;
-      }
-      else {
+      } else {
         this.insertNode(node.leftChild, newNode);
-      };
+      }
     } else {
       if (node.rightChild === null) {
         node.rightChild = newNode;
         return
-      }
-      else {
+      } else {
         this.insertNode(node.rightChild, newNode);
-      };
-    };
-  };
+      }
+    }
+  }
 }
 
 

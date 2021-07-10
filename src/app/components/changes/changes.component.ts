@@ -94,7 +94,6 @@ export class ChangesComponent implements OnInit {
     this.changeList = this.service.sortArray(this.changeList, this.sort);
     this.pageChanged();
     this.pagesLength = Math.ceil(this.changeList.length / this.pageSize);
-
   }
 
   filterTable(): void {
