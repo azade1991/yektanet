@@ -171,9 +171,6 @@ export class ChangesComponent implements OnInit {
         return bDate.getTime() - aDate.getTime();
       }
     });
-
-
-
   }
 
 }

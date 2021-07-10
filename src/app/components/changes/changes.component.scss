@@ -27,16 +27,15 @@
             }
             table {
                 width: 100%;
-                border-radius: 16px;
                 box-shadow: 0 0 15px #aaa;
                 font-size: 12px;
                 line-height: 21px;
                 border-collapse: separate;
                 border-spacing: 0;
+                border: 1px solid #aaa;
                 td{
                     min-width: 80px;
                     &.star{
-                        // display: flex;
                         svg{
                             margin-left: 5px;
                             margin-bottom: -5px;
@@ -55,6 +54,7 @@
                 }
                 thead{
                     height: 50px;
+                    
                 }
                 tbody tr:nth-child(odd) td {
                     background-color: #f6f6f6;
