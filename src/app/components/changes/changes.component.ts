@@ -1,19 +1,8 @@
 import { AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { UtilService } from 'src/app/services/util.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChangeItem, SortType } from '../model';
 
-interface ChangeItem {
-  id: number;
-  name: string;
-  date: string;
-  title: string;
-  field: string;
-  old_value: string;
-  new_value: string;
-}
-enum SortType {
-  ASC = 'asc', DESC = 'desc'
-}
 @Component({
   selector: 'app-changes',
   templateUrl: './changes.component.html',
@@ -96,13 +85,13 @@ export class ChangesComponent implements OnInit {
     if (this.filter.field) {
       this.changeList = this.changeList.filter((item: ChangeItem) => item.field.toLowerCase().includes(this.filter.field.toLowerCase()));
     }
-    if (this.filter.date) {
+    if (this.filter.date && this.errMsg === '') {
       this.changeList = this.service.binarySearch(this.changeList, new Date(this.filter.date));
     }
     if (this.changeList.length < this.pageSize) {
       this.page = 1;
     }
-    this.sortTable();
+    this.changeList = this.service.sortArray(this.changeList, this.sort);
     this.pageChanged();
     this.pagesLength = Math.ceil(this.changeList.length / this.pageSize);
 
@@ -129,8 +118,10 @@ export class ChangesComponent implements OnInit {
       // convert to english number
       this.filter.date = this.service.fixNumbers(this.filter.date);
       const date = new Date(this.filter.date);
-      if (date.getDate()) {
+      if (date.getTime()) {
         this.applyFilter();
+      } else {
+        this.errMsg = 'تاریغ نا معتبر است';
       }
     }
   }
@@ -158,19 +149,7 @@ export class ChangesComponent implements OnInit {
     } else {
       this.sort = SortType.ASC;
     }
-    this.sortTable();
+    this.changeList = this.service.sortArray(this.changeList, this.sort);
     this.pageChanged();
   }
-  sortTable(): void {
-    this.changeList.sort((a, b) => {
-      const aDate = new Date(a.date);
-      const bDate = new Date(b.date);
-      if (this.sort === SortType.ASC) {
-        return aDate.getTime() - bDate.getTime();
-      } else {
-        return bDate.getTime() - aDate.getTime();
-      }
-    });
-  }
-
 }
